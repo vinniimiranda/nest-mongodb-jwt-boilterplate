@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import { JwtService } from '@nestjs/jwt';
+
 import * as bcrypt from 'bcrypt';
 
 import {
@@ -12,7 +14,10 @@ import { LoginDto } from 'src/shared/dtos/login.dto';
 
 @Injectable()
 export class AuthService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
+    private jwtService: JwtService,
+  ) {}
 
   async create({ email, name, password }: CreateUserDto): Promise<User> {
     const saltOrRounds = 10;
@@ -25,7 +30,7 @@ export class AuthService {
     return createdUser.save();
   }
 
-  async login({ email, password }: LoginDto): Promise<User> {
+  async login({ email, password }: LoginDto): Promise<any> {
     const user = await this.userModel
       .findOne({ email })
       .select('+password')
@@ -35,7 +40,14 @@ export class AuthService {
     delete user.password;
 
     if (isMatch) {
-      return user;
+      const payload = { id: user._id };
+      return {
+        user,
+        token: {
+          access_token: this.jwtService.sign(payload),
+          expiresIn: 86400,
+        },
+      };
     }
     return null;
   }
