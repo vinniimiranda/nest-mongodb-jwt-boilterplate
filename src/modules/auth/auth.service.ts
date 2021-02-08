@@ -40,7 +40,7 @@ export class AuthService {
     delete user.password;
 
     if (isMatch) {
-      const payload = { id: user._id };
+      const payload = { userId: user._id };
       return {
         user,
         token: {
