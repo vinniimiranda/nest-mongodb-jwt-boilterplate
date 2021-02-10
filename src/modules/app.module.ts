@@ -12,7 +12,7 @@ import * as Joi from '@hapi/joi';
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri: 'mongodb://localhost/quiz',
+        uri: configService.get('MONGO_URL'),
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
@@ -26,6 +26,7 @@ import * as Joi from '@hapi/joi';
       validationSchema: Joi.object({
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRATION_TIME: Joi.string().required(),
+        MONGO_URL: Joi.string().required(),
       }),
     }),
   ],

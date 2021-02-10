@@ -1,8 +1,8 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtService } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
-import { Response } from 'express';
+
 import mockResponse from 'src/shared/utils/mocks/reponse';
 import mockedConfigService from 'src/shared/utils/mocks/config.service';
 import mockedJwtService from 'src/shared/utils/mocks/jwt.service';
@@ -12,7 +12,6 @@ import {
 } from '../../shared/infra/database/schemas/user.schema';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { JwtStrategy } from './jwt-strategy';
 
 describe('AuthController', () => {
   let controller: AuthController;
@@ -24,7 +23,7 @@ describe('AuthController', () => {
         MongooseModule.forRootAsync({
           imports: [ConfigModule],
           useFactory: async (configService: ConfigService) => ({
-            uri: 'mongodb://localhost/quiz',
+            uri: configService.get('MONGO_URL'),
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true,

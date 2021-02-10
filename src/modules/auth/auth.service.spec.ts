@@ -19,7 +19,7 @@ describe('AuthService', () => {
         MongooseModule.forRootAsync({
           imports: [ConfigModule],
           useFactory: async (configService: ConfigService) => ({
-            uri: 'mongodb://localhost/quiz',
+            uri: configService.get('MONGO_URL'),
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true,
