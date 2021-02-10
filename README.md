@@ -1,5 +1,5 @@
 ![Node.js CI](https://github.com/vinniimiranda/nest-mongodb-jwt-template/workflows/Node.js%20CI/badge.svg?branch=main)
-
+[![codecov](https://codecov.io/gh/vinniimiranda/nest-mongodb-jwt-template/branch/main/graph/badge.svg?token=H7N1LV8HN5)](https://codecov.io/gh/vinniimiranda/nest-mongodb-jwt-template)
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
