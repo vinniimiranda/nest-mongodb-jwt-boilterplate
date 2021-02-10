@@ -9,7 +9,7 @@ import mockedJwtService from 'src/shared/utils/mocks/jwt.service';
 import {
   User,
   UserSchema,
-} from '../../shared/infra/database/schemas/user.schema';
+} from 'src/shared/infra/database/schemas/user.schema';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 

@@ -8,9 +8,9 @@ import * as bcrypt from 'bcrypt';
 import {
   User,
   UserDocument,
-} from '../../shared/infra/database/schemas/user.schema';
-import { CreateUserDto } from '../../shared/dtos/create-user.dto';
-import { LoginDto } from '../../shared/dtos/login.dto';
+} from 'src/shared/infra/database/schemas/user.schema';
+import { CreateUserDto } from 'src/shared/dtos/create-user.dto';
+import { LoginDto } from 'src/shared/dtos/login.dto';
 
 @Injectable()
 export class AuthService {

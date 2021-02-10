@@ -91,7 +91,7 @@
     "testEnvironment": "node"
   },
   "lint-staged": {
-    "src/**/*.{js,ts}": [
+    "src/**/*.{ts}": [
       "eslint . --fix",
       "git add",
       "yarn test jest --bail —-findRelatedTests"

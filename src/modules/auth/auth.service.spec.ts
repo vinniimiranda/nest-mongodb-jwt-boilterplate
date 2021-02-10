@@ -2,12 +2,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
-import mockedConfigService from '../../shared/utils/mocks/config.service';
-import mockedJwtService from '../../shared/utils/mocks/jwt.service';
+import mockedConfigService from 'src/shared/utils/mocks/config.service';
+import mockedJwtService from 'src/shared/utils/mocks/jwt.service';
 import {
   User,
   UserSchema,
-} from '../../shared/infra/database/schemas/user.schema';
+} from 'src/shared/infra/database/schemas/user.schema';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
