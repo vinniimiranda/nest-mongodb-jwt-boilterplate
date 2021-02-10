@@ -12,6 +12,14 @@ import {
 import { CreateUserDto } from 'src/shared/dtos/create-user.dto';
 import { LoginDto } from 'src/shared/dtos/login.dto';
 
+interface LoginResponse {
+  user: User;
+  token: {
+    accessToken: string;
+    expiresIn: number;
+  };
+}
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -30,7 +38,7 @@ export class AuthService {
     return createdUser.save();
   }
 
-  async login({ email, password }: LoginDto): Promise<any> {
+  async login({ email, password }: LoginDto): Promise<LoginResponse> {
     const user = await this.userModel
       .findOne({ email })
       .select('+password')

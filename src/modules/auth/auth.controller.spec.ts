@@ -64,19 +64,25 @@ describe('AuthController', () => {
     expect(user).toHaveProperty('_id');
   });
   it('should authenticate an user', async () => {
-    const auth = await controller.login(mockResponse, {
+    const { user, token } = (await controller.login(mockResponse, {
       email: 'teste@mail.com',
       password: '123456',
-    });
-    expect(auth.user).toHaveProperty('_id');
-    expect(auth.token).toHaveProperty('accessToken');
-    expect(auth.token.accessToken).toBe('token');
+    })) as {
+      user: User;
+      token: {
+        accessToken: string;
+        expiresIn: number;
+      };
+    };
+    expect(user).toHaveProperty('_id');
+    expect(token).toHaveProperty('accessToken');
+    expect(token.accessToken).toBe('token');
   });
   it('should not authenticate an user with invalid credentials', async () => {
-    const auth = await controller.login(mockResponse, {
+    const invalid = await controller.login(mockResponse, {
       email: 'teste@mail.com',
       password: '',
     });
-    expect(auth.statusCode).toBe(401);
+    expect(invalid.statusCode).toBe(401);
   });
 });

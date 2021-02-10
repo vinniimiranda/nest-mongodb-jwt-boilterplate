@@ -60,19 +60,19 @@ describe('AuthService', () => {
     expect(user).toHaveProperty('_id');
   });
   it('should authenticate an user', async () => {
-    const auth = await service.login({
+    const { user, token } = await service.login({
       email: 'tester@gmail.com',
       password: '123456',
     });
-    expect(auth.user).toHaveProperty('_id');
-    expect(auth.token).toHaveProperty('accessToken');
-    expect(auth.token.accessToken).toBe('token');
+    expect(user).toHaveProperty('_id');
+    expect(token).toHaveProperty('accessToken');
+    expect(token.accessToken).toBe('token');
   });
   it('should return null for invalid user credentials', async () => {
-    const auth = await service.login({
+    const invalid = await service.login({
       email: 'tester@gmail.com',
       password: 'abc123',
     });
-    expect(auth).toBeNull();
+    expect(invalid).toBeNull();
   });
 });
