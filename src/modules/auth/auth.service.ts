@@ -40,11 +40,12 @@ export class AuthService {
     delete user.password;
 
     if (isMatch) {
-      const payload = { userId: user._id };
+      const payload = { userId: user._id, email: user.email };
+      const accessToken = this.jwtService.sign(payload);
       return {
         user,
         token: {
-          access_token: this.jwtService.sign(payload),
+          accessToken,
           expiresIn: 86400,
         },
       };

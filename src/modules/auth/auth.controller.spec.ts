@@ -69,8 +69,8 @@ describe('AuthController', () => {
       password: '123456',
     });
     expect(auth.user).toHaveProperty('_id');
-    expect(auth.token).toHaveProperty('access_token');
-    expect(auth.token.access_token).toBe('token');
+    expect(auth.token).toHaveProperty('accessToken');
+    expect(auth.token.accessToken).toBe('token');
   });
   it('should not authenticate an user with invalid credentials', async () => {
     const auth = await controller.login(mockResponse, {
