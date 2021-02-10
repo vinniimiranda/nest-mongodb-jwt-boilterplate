@@ -22,7 +22,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn install
-    - run: yarn test
+    - run: yarn test --coverage && yarn codecov --tokne=121139aa-5935-40f9-b364-bff4c6b32a2b
     - run: yarn lint
       env:
         CI: true
